@@ -1,0 +1,95 @@
+<p-progressSpinner class="progressSpinner" *ngIf="showLoader"></p-progressSpinner>
+<form [formGroup]="serverForm">
+
+    <div class="whole-container" [ngClass]="showLoader ? 'container-blur' : ''">
+        <h1 *ngIf="showFilterOptions">{{localConstant.serverTxt}}</h1>
+        <div class="container">
+            <div class="holder filter-holder" *ngIf="showFilterOptions">
+
+                <div class="filter-container location-dropdown">
+                    <div class="filter-heading">{{localConstant.localTxt}}</div>
+                    <p-dropdown [options]="filterDatas.location" formControlName="selectedLocation"
+                        placeholder="Select a Location" [(ngModel)]="selectedLocation" optionLabel="name">
+                    </p-dropdown>
+                </div>
+
+                <div class="filter-container">
+                    <div class="filter-heading">{{localConstant.ramTxt}}</div>
+                    <div class="ram-container">
+                        <div class="holders " *ngFor="let ramValue of filterDatas.ram">
+                            <p-checkbox name="group2" value="ramValue" formControlName="selectedValues"
+                                [value]="ramValue" [(ngModel)]="selectedRamValue" [inputId]="ramValue.key"></p-checkbox>
+                            <label [for]="ramValue.key"> {{ramValue.name}}</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-container">
+                    <div class="filter-heading">{{localConstant.storageTxt}}</div>
+                    <ngx-slider (userChangeEnd)="onUserChangeEnd($event)" [(value)]="value"
+                        formControlName="storageValue" [(highValue)]="maxValue" [options]="rangeOptions"></ngx-slider>
+                </div>
+
+
+                <div class="filter-container">
+                    <div class="filter-heading">{{localConstant.hddTxt}}</div>
+                    <p-dropdown [options]="filterDatas.hdd" placeholder="Select a HDD" formControlName="selectedHDD"
+                        [(ngModel)]="selectedHDD" optionLabel="name"></p-dropdown>
+                </div>
+
+                <div class="filter-btn">
+                    <p-button label="Filter" icon="pi pi-filter" (onClick)="applyFilter()"
+                        [disabled]="disableFilterBtn"></p-button>
+                    <button pButton pRipple type="button" icon="pi pi-times" label="Clear" (click)="clearFilter()"
+                        class="p-button-raised p-button-text p-button-plain clear-btn"
+                        [disabled]="disableFilterBtn"></button>
+                </div>
+
+            </div>
+            <div class="holder" *ngIf="showFilterOptions">
+                <p-table [columns]="cols" [value]="serverDetails" sortMode="multiple" [rowHover]="true">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field">{{col.header}} <p-sortIcon
+                                    [field]="col.field"></p-sortIcon>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="columns.length" class="no-content">
+                                {{localConstant.noContentTxt}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                            <td *ngFor="let col of columns">
+
+                                <div *ngIf="col.field === 'ram'">
+                                    <div> {{rowData[col.field].memory}}{{rowData[col.field].unit}}</div>
+                                    <div>{{rowData[col.field].type}}</div>
+                                </div>
+                                <div *ngIf="col.field === 'hdd'">
+                                    <div> {{rowData[col.field].memory}}X{{rowData[col.field].count}}
+                                        {{rowData[col.field].unit}}</div>
+                                    <div>{{rowData[col.field].type}}</div>
+                                </div>
+                                <div *ngIf="col.field === 'price'">
+                                    <div class="price">
+                                        {{rowData[col.field].currencySymbol}}{{rowData[col.field].amountCents}}</div>
+                                    <div class="price">{{rowData[col.field].type}}</div>
+                                </div>
+                                <div *ngIf="col.field === 'model' || col.field === 'location'">
+                                    {{rowData[col.field]}}
+                                </div>
+
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+
+</form>
