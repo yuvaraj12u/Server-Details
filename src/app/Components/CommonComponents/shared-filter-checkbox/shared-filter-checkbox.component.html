@@ -1,0 +1,8 @@
+<div class="filter-heading">{{dropdownLabel}}</div>
+<div class="ram-container">
+    <div class="holders " *ngFor="let ramValue of ramData">
+        <p-checkbox name="group2" value="ramValue" [value]="ramValue"
+            [(ngModel)]="selectedRamValue" (ngModelChange)="dropdownValueChanged()" [inputId]="ramValue.key"></p-checkbox>
+        <label [for]="ramValue.key"> {{ramValue.name}}</label>
+    </div>
+</div>

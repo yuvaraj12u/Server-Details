@@ -1,0 +1,16 @@
+.ram-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 150px;
+    justify-content: space-between;
+    .holders {
+      padding: 0 8px 18px 0px;
+    }
+  }
+  .filter-heading {
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+  }

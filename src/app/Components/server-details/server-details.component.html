@@ -1,0 +1,49 @@
+<p-progressSpinner class="progressSpinner" *ngIf="showLoader"></p-progressSpinner>
+<form [formGroup]="serverForm">
+
+    <div class="whole-container" [ngClass]="showLoader ? 'container-blur' : ''">
+        <h1 *ngIf="showFilterOptions">{{localConstant.serverTxt}}</h1>
+        <div class="container">
+            <div class="holder filter-holder" *ngIf="showFilterOptions">
+
+                <div class="filter-container location-dropdown">
+                    <app-shared-filter-dropdown [dropdownLabel]="localConstant.localTxt"
+                        (valueSelected)="dropdownValueChanged($event, 'location')" [optionsData]="filterDatas.location"
+                        [placeHolderName]="localConstant.locationPlaceHolderTxt"></app-shared-filter-dropdown>
+                </div>
+
+                <div class="filter-container">
+                    <app-shared-filter-checkbox [dropdownLabel]="localConstant.ramTxt"
+                        (valueSelected)="dropdownValueChanged($event, 'ram')" [ramData]="filterDatas.ram">
+                    </app-shared-filter-checkbox>
+                </div>
+
+                <div class="filter-container">
+                    <app-shared-range-slider [maxValue]="maxValue"
+                        (valueSelected)="dropdownValueChanged($event, 'storage')" [labelTxt]="localConstant.storageTxt"
+                        [sliderOptions]="rangeOptions"></app-shared-range-slider>
+                </div>
+
+
+                <div class="filter-container">
+                    <app-shared-filter-dropdown [dropdownLabel]="localConstant.hddTxt"
+                        (valueSelected)="dropdownValueChanged($event, 'hdd')" [optionsData]="filterDatas.hdd"
+                        [placeHolderName]="localConstant.hddPlaceHolderTxt"></app-shared-filter-dropdown>
+                </div>
+
+                <div class="filter-btn">
+                    <p-button label="Filter" icon="pi pi-filter" (onClick)="applyFilter()"
+                        [disabled]="disableFilterBtn"></p-button>
+                    <button pButton pRipple type="button" icon="pi pi-times" label="Clear" (click)="clearFilter()"
+                        class="p-button-raised p-button-text p-button-plain clear-btn"
+                        [disabled]="disableFilterBtn"></button>
+                </div>
+
+            </div>
+            <div class="holder" *ngIf="showFilterOptions">
+                <app-server-grid [serverData]="serverDetails"></app-server-grid>
+            </div>
+        </div>
+    </div>
+
+</form>

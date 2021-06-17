@@ -12,10 +12,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { ServerDetailsComponent } from './Components/server-details/server-details.component';
+import { ServerGridComponent } from './Components/CommonComponents/server-grid/server-grid.component';
+import { SharedRangeSliderComponent } from './Components/CommonComponents/shared-range-slider/shared-range-slider.component';
+import { SharedFilterDropdownComponent } from './Components/CommonComponents/shared-filter-dropdown/shared-filter-dropdown.component';
+import { SharedFilterCheckboxComponent } from './Components/CommonComponents/shared-filter-checkbox/shared-filter-checkbox.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ServerDetailsComponent,
+    ServerGridComponent,
+    SharedRangeSliderComponent,
+    SharedFilterDropdownComponent,
+    SharedFilterCheckboxComponent
   ],
   imports: [
     BrowserModule,

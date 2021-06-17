@@ -4,7 +4,9 @@ const appConstant = {
     ramTxt: 'RAM',
     hddTxt: 'HDD',
     storageTxt: 'STORAGE',
-    noContentTxt: 'No Contents Found'
+    noContentTxt: 'No Contents Found',
+    locationPlaceHolderTxt: 'Select a Location',
+    hddPlaceHolderTxt: 'Select a HDD'
 };
 
 export default appConstant;

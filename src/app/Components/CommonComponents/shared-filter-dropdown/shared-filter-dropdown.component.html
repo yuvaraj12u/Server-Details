@@ -1,0 +1,5 @@
+
+    <div class="filter-heading">{{dropdownLabel}}</div>
+    <p-dropdown [options]="optionsData"
+        [placeholder]="placeHolderName" optionLabel="name" [(ngModel)]="selectedLocation" (ngModelChange)="dropdownValueChanged()">
+    </p-dropdown>
